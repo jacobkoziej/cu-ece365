@@ -154,7 +154,7 @@ int ht::insert(const void *key, std::size_t siz, void *val)
 	// invalid key size
 	if (!siz) return -1;
 
-	if (ent_cnt + 1 >= ent_cnt / 2) rehash();
+	if (ent_cnt + 1 >= ent.size() / 2) rehash();
 
 	std::uint64_t pos = fnv1a_hash(key, siz) % ent.size();
 
