@@ -138,6 +138,39 @@ int ht::get(const void *key, std::size_t siz, void **val) const
 	return -1;
 }
 
+int ht::insert(const void *key, std::size_t siz, void *val)
+{
+	// invalid key size
+	if (!siz) return -1;
+
+	if (ent_cnt + 1 >= ent_cnt / 2) rehash();
+
+	std::uint64_t pos = fnv1a_hash(key, siz) % ent.size();
+
+	std::size_t i = 0;
+	do {
+		// we've somehow traversed the entire hash table
+		if (i > ent.size()) return -1;
+
+		auto &cur = ent[pos];
+
+		if (!cur.key && !cur.del) continue;
+
+		if (cur.key) operator delete(cur.key);
+
+		cur.key = operator new(siz);
+		cur.siz = siz;
+		cur.val = val;
+		cur.del = false;
+
+		std::memcpy(cur.key, key, siz);
+
+		return 0;
+	} while (pos = (pos + 1) % ent.size(), ++i, true);
+
+	return -1;
+}
+
 int ht::rm(const void *key, std::size_t siz)
 {
 	// invalid key size
