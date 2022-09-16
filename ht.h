@@ -21,6 +21,7 @@
 
 
 #include <cstdlib>
+#include <vector>
 
 
 class ht {
@@ -31,6 +32,9 @@ class ht {
 		bool         set = false;
 		bool         del = false;
 	} ht_ent_t;
+
+	std::vector<ht_ent_t> ent;
+	std::size_t           ent_cnt;
 
 public:
 	int  clear(const void *key, std::size_t siz);
