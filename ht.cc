@@ -22,6 +22,24 @@
 #include <cstring>
 
 
+#define FNV_OFFSET_BASIS 0xcbf29ce484222325UL
+#define FNV_PRIME        0x100000001b3UL
+
+
+std::uint64_t ht::fnv1a_hash(const void *key, std::size_t siz)
+{
+	std::uint64_t hash = FNV_OFFSET_BASIS;
+
+	const unsigned char *byte = static_cast<const unsigned char*>(key);
+	for (size_t i = 0; i < siz; i++, byte++) {
+		hash ^= *byte;
+		hash *= FNV_PRIME;
+	}
+
+	return hash;
+}
+
+
 bool ht::exists(const void *key, std::size_t siz) const
 {
 	// invalid key size
@@ -30,7 +48,7 @@ bool ht::exists(const void *key, std::size_t siz) const
 	// empty hash table
 	if (!ent_cnt) return false;
 
-	std::uint64_t pos = hash(key, siz) % ent.size();
+	std::uint64_t pos = fnv1a_hash(key, siz) % ent.size();
 
 	std::size_t i = 0;
 	do {
@@ -57,7 +75,7 @@ int ht::get(const void *key, std::size_t siz, void **val) const
 	// empty hash table
 	if (!ent_cnt) return -1;
 
-	std::uint64_t pos = hash(key, siz) % ent.size();
+	std::uint64_t pos = fnv1a_hash(key, siz) % ent.size();
 
 	std::size_t i = 0;
 	do {
@@ -87,7 +105,7 @@ int ht::rm(const void *key, std::size_t siz)
 	// empty hash table
 	if (!ent_cnt) return -1;
 
-	std::uint64_t pos = hash(key, siz) % ent.size();
+	std::uint64_t pos = fnv1a_hash(key, siz) % ent.size();
 
 	std::size_t i = 0;
 	do {

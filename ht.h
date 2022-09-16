@@ -36,8 +36,7 @@ class ht {
 	std::vector<ht_ent_t> ent;
 	std::size_t           ent_cnt;
 
-	// TOOD: decide on a hash function
-	static std::uint64_t hash(const void *key, std::size_t siz);
+	static std::uint64_t fnv1a_hash(const void *key, std::size_t siz);
 
 public:
 	bool exists(const void *key, std::size_t siz) const;
