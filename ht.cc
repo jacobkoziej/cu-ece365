@@ -195,6 +195,8 @@ int ht::rm(const void *key, std::size_t siz)
 
 		if (!std::memcmp(cur.key, key, siz)) {
 			cur.del = true;
+			--ent_cnt;
+
 			return 0;
 		}
 	} while (pos = (pos + 1) % ent.size(), ++i, true);
