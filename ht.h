@@ -24,6 +24,14 @@
 
 
 class ht {
+	typedef struct ht_ent_s {
+		void        *key;
+		std::size_t  siz;
+		void        *val;
+		bool         set = false;
+		bool         del = false;
+	} ht_ent_t;
+
 public:
 	int  clear(const void *key, std::size_t siz);
 	bool exists(const void *key, std::size_t siz);
