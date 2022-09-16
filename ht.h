@@ -20,6 +20,7 @@
 #define CU_ECE365_HT_H
 
 
+#include <cstdint>
 #include <cstdlib>
 #include <vector>
 
@@ -35,6 +36,9 @@ class ht {
 
 	std::vector<ht_ent_t> ent;
 	std::size_t           ent_cnt;
+
+	// TOOD: decide on a hash function
+	static std::uint64_t hash(const void *key, std::size_t siz);
 
 public:
 	int  clear(const void *key, std::size_t siz);
