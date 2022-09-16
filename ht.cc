@@ -39,7 +39,7 @@ bool ht::exists(const void *key, std::size_t siz) const
 
 		const ht_ent_t &cur = ent[pos];
 
-		if (!cur.set) return false;
+		if (!cur.key) return false;
 
 		if (cur.siz != siz) continue;
 

@@ -27,10 +27,9 @@
 
 class ht {
 	typedef struct ht_ent_s {
-		void        *key;
+		void        *key = nullptr;
 		std::size_t  siz;
 		void        *val;
-		bool         set = false;
 		bool         del = false;
 	} ht_ent_t;
 
