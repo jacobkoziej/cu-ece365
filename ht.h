@@ -41,7 +41,6 @@ class ht {
 	static std::uint64_t hash(const void *key, std::size_t siz);
 
 public:
-	int  clear(const void *key, std::size_t siz);
 	bool exists(const void *key, std::size_t siz) const;
 	int  get(const void *key, std::size_t siz, void **val) const;
 	int  insert(const void *key, std::size_t siz, void *val = nullptr);
