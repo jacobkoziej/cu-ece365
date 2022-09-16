@@ -25,6 +25,7 @@
 
 class ht {
 public:
+	int  clear(const void *key, std::size_t siz);
 	bool exists(const void *key, std::size_t siz);
 	int  get(const void *key, std::size_t siz, void **val);
 	int  insert(const void *key, std::size_t siz, void *val = nullptr);
