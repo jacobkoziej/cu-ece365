@@ -49,7 +49,11 @@ void ht::rehash(void)
 	for (auto &prv : ent) {
 		if (!cnt) break;
 
-		if (!prv.key || !prv.del) continue;
+		if (!prv.key) continue;
+		if (!prv.del) {
+			operator delete(prv.key);
+			continue;
+		}
 
 		std::uint64_t pos = fnv1a_hash(prv.key, prv.siz) % newent.size();
 
@@ -156,8 +160,6 @@ int ht::rm(const void *key, std::size_t siz)
 		if (cur.siz != siz) continue;
 
 		if (!std::memcmp(cur.key, key, siz)) {
-			operator delete(cur.val);
-			cur.val = nullptr;
 			cur.del = true;
 			return 0;
 		}
