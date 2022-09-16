@@ -38,6 +38,8 @@ class ht {
 
 	static std::uint64_t fnv1a_hash(const void *key, std::size_t siz);
 
+	void rehash(void);
+
 public:
 	ht(std::size_t defsiz = 64);
 

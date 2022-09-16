@@ -39,6 +39,32 @@ std::uint64_t ht::fnv1a_hash(const void *key, std::size_t siz)
 	return hash;
 }
 
+void ht::rehash(void)
+{
+	std::size_t newsiz = ent.size() * 2;
+
+	std::vector<ht_ent_t> newent(newsiz);
+
+	auto cnt = ent_cnt;
+	for (auto &prv : ent) {
+		if (!cnt) break;
+
+		if (!prv.key || !prv.del) continue;
+
+		std::uint64_t pos = fnv1a_hash(prv.key, prv.siz) % newent.size();
+
+		ht_ent_t *cur;
+		while (cur = &newent[pos], !cur->key) {
+			*cur = prv;
+			pos = (pos + 1) % newent.size();
+		}
+
+		--cnt;
+	}
+
+	ent.swap(newent);
+}
+
 
 ht::ht(std::size_t defsiz)
 {
