@@ -42,6 +42,7 @@ class ht {
 
 public:
 	ht(std::size_t defsiz = 64);
+	~ht(void);
 
 	bool exists(const void *key, std::size_t siz) const;
 	int  get(const void *key, std::size_t siz, void **val) const;

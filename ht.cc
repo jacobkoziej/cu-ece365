@@ -81,6 +81,17 @@ ht::ht(std::size_t defsiz)
 	ent_cnt = defsiz;
 }
 
+ht::~ht(void)
+{
+	auto cnt = ent_cnt;
+
+	for (auto cur : ent) {
+		if (!cnt) return;
+
+		if (cur.key) operator delete(cur.key);
+	}
+}
+
 bool ht::exists(const void *key, std::size_t siz) const
 {
 	// invalid key size
