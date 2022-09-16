@@ -66,7 +66,7 @@ bool ht::exists(const void *key, std::size_t siz) const
 		// we've somehow traversed the entire hash table
 		if (i > ent.size()) return false;
 
-		const ht_ent_t &cur = ent[pos];
+		const auto &cur = ent[pos];
 
 		if (!cur.key && !cur.del) return false;
 
@@ -93,7 +93,7 @@ int ht::get(const void *key, std::size_t siz, void **val) const
 		// we've somehow traversed the entire hash table
 		if (i > ent.size()) return -1;
 
-		const ht_ent_t &cur = ent[pos];
+		const auto &cur = ent[pos];
 
 		if (!cur.key && !cur.del) return -1;
 
