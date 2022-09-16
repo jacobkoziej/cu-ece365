@@ -78,3 +78,35 @@ int ht::get(const void *key, std::size_t siz, void **val) const
 
 	return -1;
 }
+
+int ht::rm(const void *key, std::size_t siz)
+{
+	// invalid key size
+	if (!siz) return -1;
+
+	// empty hash table
+	if (!ent_cnt) return -1;
+
+	std::uint64_t pos = hash(key, siz) % ent.size();
+
+	std::size_t i = 0;
+	do {
+		// we've somehow traversed the entire hash table
+		if (i > ent.size()) return -1;
+
+		ht_ent_t &cur = ent[pos];
+
+		if (!cur.key && !cur.del) return -1;
+
+		if (cur.siz != siz) continue;
+
+		if (!std::memcmp(cur.key, key, siz)) {
+			operator delete(cur.val);
+			cur.val = nullptr;
+			cur.del = true;
+			return 0;
+		}
+	} while (pos = (pos + 1) % ent.size(), ++i, true);
+
+	return -1;
+}
