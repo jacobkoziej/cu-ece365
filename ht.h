@@ -20,7 +20,16 @@
 #define CU_ECE365_HT_H
 
 
+#include <cstdlib>
+
+
 class ht {
+public:
+	bool exists(const void *key, std::size_t siz);
+	int  get(const void *key, std::size_t siz, void **val);
+	int  insert(const void *key, std::size_t siz, void *val = nullptr);
+	int  rm(const void *key, std::size_t siz);
+	int  set(const void *key, std::size_t siz, void *val);
 };
 
 
