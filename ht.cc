@@ -48,3 +48,33 @@ bool ht::exists(const void *key, std::size_t siz) const
 
 	return false;
 }
+
+int ht::get(const void *key, std::size_t siz, void **val) const
+{
+	// invalid key size
+	if (!siz) return -1;
+
+	// empty hash table
+	if (!ent_cnt) return -1;
+
+	std::uint64_t pos = hash(key, siz) % ent.size();
+
+	std::size_t i = 0;
+	do {
+		// we've somehow traversed the entire hash table
+		if (i > ent.size()) return -1;
+
+		const ht_ent_t &cur = ent[pos];
+
+		if (!cur.key && !cur.del) return -1;
+
+		if (cur.siz != siz) continue;
+
+		if (!std::memcmp(cur.key, key, siz)) {
+			*val = cur.val;
+			return 0;
+		}
+	} while (pos = (pos + 1) % ent.size(), ++i, true);
+
+	return -1;
+}
