@@ -40,6 +40,17 @@ std::uint64_t ht::fnv1a_hash(const void *key, std::size_t siz)
 }
 
 
+ht::ht(std::size_t defsiz)
+{
+	// determine highest power of two
+	unsigned shift = 0;
+	while (defsiz >>= 1, defsiz) ++shift;
+	defsiz = ((std::size_t) 1) << shift;
+
+	ent.resize(defsiz);
+	ent_cnt = defsiz;
+}
+
 bool ht::exists(const void *key, std::size_t siz) const
 {
 	// invalid key size
