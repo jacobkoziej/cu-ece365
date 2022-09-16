@@ -164,6 +164,7 @@ int ht::insert(const void *key, std::size_t siz, void *val)
 		cur.del = false;
 
 		std::memcpy(cur.key, key, siz);
+		++ent_cnt;
 
 		return 0;
 	} while (pos = (pos + 1) % ent.size(), ++i, true);
