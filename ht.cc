@@ -50,17 +50,22 @@ void ht::rehash(void)
 		if (!cnt) break;
 
 		if (!prv.key) continue;
-		if (!prv.del) {
+		if (prv.del) {
 			operator delete(prv.key);
 			continue;
 		}
 
 		std::uint64_t pos = fnv1a_hash(prv.key, prv.siz) % newent.size();
 
-		ht_ent_t *cur;
-		while (cur = &newent[pos], !cur->key) {
-			*cur = prv;
+		// potentially dangerous infinite loop ;)
+		while (true) {
+			auto &cur = newent[pos];
 			pos = (pos + 1) % newent.size();
+
+			if (cur.key) continue;
+
+			cur = prv;
+			break;
 		}
 
 		--cnt;
