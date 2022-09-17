@@ -33,7 +33,8 @@ clean:
 	@rm -rvf $(DEP) *.a *.o spellcheck
 
 
-spellcheck: ht.a spellcheck.o
+spellcheck: spellcheck.o ht.a
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 
 ht.a: ht.o
