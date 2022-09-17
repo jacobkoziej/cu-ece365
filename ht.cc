@@ -116,7 +116,7 @@ bool ht::exists(const void *key, std::size_t siz) const
 
 		if (!cur.key && !cur.del) return false;
 
-		if (cur.siz != siz) continue;
+		if (cur.del || (cur.siz != siz)) continue;
 
 		if (!std::memcmp(cur.key, key, siz)) return true;
 	} while (pos = (pos + 1) % ent.size(), ++i, true);
@@ -143,7 +143,7 @@ int ht::get(const void *key, std::size_t siz, void **val) const
 
 		if (!cur.key && !cur.del) return -1;
 
-		if (cur.siz != siz) continue;
+		if (cur.del || (cur.siz != siz)) continue;
 
 		if (!std::memcmp(cur.key, key, siz)) {
 			*val = cur.val;
@@ -249,7 +249,7 @@ int ht::set(const void *key, std::size_t siz, void *val)
 
 		if (!cur.key && !cur.del) return -1;
 
-		if (cur.siz != siz) continue;
+		if (cur.del || (cur.siz != siz)) continue;
 
 		if (!std::memcmp(cur.key, key, siz)) {
 			cur.val = val;
