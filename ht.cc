@@ -78,7 +78,7 @@ ht::ht(std::size_t defsiz)
 	defsiz = ((std::size_t) 1) << shift;
 
 	ent.resize(defsiz);
-	ent_cnt = defsiz;
+	ent_cnt = 0;
 }
 
 ht::~ht(void)
