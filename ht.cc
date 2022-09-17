@@ -165,9 +165,19 @@ int ht::insert(const void *key, std::size_t siz, void *val)
 
 		auto &cur = ent[pos];
 
-		if (!cur.key && !cur.del) continue;
+		if (cur.key) {
+			if (!cur.del) {
+				// duplicate entry
+				if (cur.siz == siz)
+					if (!std::memcmp(cur.key, key, siz))
+						return -1;
 
-		if (cur.key) operator delete(cur.key);
+				continue;
+			}
+
+			// lazily deleted entry
+			operator delete(cur.key);
+		}
 
 		cur.key = operator new(siz);
 		cur.siz = siz;
