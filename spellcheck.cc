@@ -22,9 +22,13 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
+#include <regex>
 #include <string>
 
 #include "ht.h"
+
+
+#define MAX_WORD_LEN 20
 
 
 using namespace std;
@@ -91,6 +95,53 @@ int main(int argc, char **argv)
 		cerr << argv[0] << ": '" << tmp << "' not found!\n";
 		return EXIT_FAILURE;
 	}
+
+	unsigned i = 0;
+	string line;
+	regex word_re("[A-Za-z0-9\\-']+");
+
+	t0 = clock();
+	while (++i, getline(ifile, line)) {
+		transform(line.begin(), line.end(), line.begin(), ::tolower);
+
+		sregex_token_iterator end;
+
+		for (
+			sregex_token_iterator token(
+				line.begin(),
+				line.end(),
+				word_re
+			);
+			token != end;
+			token++
+		) {
+			tmp = *token;
+
+			if (tmp.length() > MAX_WORD_LEN) {
+				ofile
+					<< "Long word at line "
+					<< i
+					<< ", starts: "
+					<< tmp.substr(0, MAX_WORD_LEN)
+					<< '\n';
+				continue;
+			}
+
+			if (!dict.exists(tmp))
+				ofile
+					<< "Unknown word at line "
+					<< i
+					<< ": "
+					<< tmp
+					<< '\n';
+		}
+	}
+	t1 = clock();
+	cout
+		<< "spell checked document in "
+		<< (t1 - t0) / CLOCKS_PER_SEC
+		<< "s\n";
+	ifile.close();
 
 	return EXIT_SUCCESS;
 }
