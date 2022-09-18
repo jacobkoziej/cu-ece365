@@ -110,7 +110,7 @@ bool ht::exists(const void *key, std::size_t siz) const
 	std::size_t i = 0;
 	do {
 		// we've somehow traversed the entire hash table
-		if (i > ent.size()) return false;
+		if (i >= ent.size()) return false;
 
 		const auto &cur = ent[pos];
 
@@ -137,7 +137,7 @@ int ht::get(const void *key, std::size_t siz, void **val) const
 	std::size_t i = 0;
 	do {
 		// we've somehow traversed the entire hash table
-		if (i > ent.size()) return -1;
+		if (i >= ent.size()) return -1;
 
 		const auto &cur = ent[pos];
 
@@ -166,7 +166,7 @@ int ht::insert(const void *key, std::size_t siz, void *val)
 	std::size_t i = 0;
 	do {
 		// we've somehow traversed the entire hash table
-		if (i > ent.size()) return -1;
+		if (i >= ent.size()) return -1;
 
 		auto &cur = ent[pos];
 
@@ -211,7 +211,7 @@ int ht::rm(const void *key, std::size_t siz)
 	std::size_t i = 0;
 	do {
 		// we've somehow traversed the entire hash table
-		if (i > ent.size()) return -1;
+		if (i >= ent.size()) return -1;
 
 		ht_ent_t &cur = ent[pos];
 
@@ -243,7 +243,7 @@ int ht::set(const void *key, std::size_t siz, void *val)
 	std::size_t i = 0;
 	do {
 		// we've somehow traversed the entire hash table
-		if (i > ent.size()) return -1;
+		if (i >= ent.size()) return -1;
 
 		auto &cur = ent[pos];
 
