@@ -30,7 +30,7 @@ all: spellcheck
 
 .PHONY: clean
 clean:
-	@rm -rvf $(DEP) *.a *.o spellcheck
+	@rm -rvf *.a *.d *.o spellcheck
 
 
 spellcheck: spellcheck.o ht.a
