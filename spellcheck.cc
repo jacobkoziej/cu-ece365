@@ -18,11 +18,30 @@
  */
 
 #include <cstdlib>
+#include <string>
 
 #include "ht.h"
 
 
+using namespace std;
+
+
+inline const void *stringkey(const string &key)
+{
+	(void) key;
+
+	return key.data();
+}
+
+inline size_t stringsiz(const string &key)
+{
+	return key.size();
+}
+
+
 int main(void)
 {
+	htt<string> dict(stringkey, stringsiz);
+
 	return EXIT_SUCCESS;
 }
