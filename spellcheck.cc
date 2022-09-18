@@ -72,6 +72,25 @@ int main(int argc, char **argv)
 	}
 	t1 = clock();
 	cout << "loaded dictionary in " << (t1 - t0) / CLOCKS_PER_SEC << "s\n";
+	ifile.close();
+
+	cout << "Path to input file: ";
+	cin >> tmp;
+
+	ifile.open(tmp);
+	if (!ifile) {
+		cerr << argv[0] << ": '" << tmp << "' not found!\n";
+		return EXIT_FAILURE;
+	}
+
+	cout << "Path to output file: ";
+	cin >> tmp;
+
+	ofile.open(tmp);
+	if (!ofile) {
+		cerr << argv[0] << ": '" << tmp << "' not found!\n";
+		return EXIT_FAILURE;
+	}
 
 	return EXIT_SUCCESS;
 }
