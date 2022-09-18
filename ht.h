@@ -55,8 +55,8 @@ template <typename T>
 class htt {
 	ht p_ht;
 
-	const void *(*key)(const T &key) = nullptr;
-	std::size_t (*siz)(const T &key) = nullptr;
+	const void  *(*key)(const T &key) = nullptr;
+	std::size_t  (*siz)(const T &key) = nullptr;
 
 public:
 	htt(const void *(*key)(const T &key), std::size_t (*siz)(const T &key));
