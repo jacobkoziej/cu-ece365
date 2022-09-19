@@ -59,6 +59,7 @@ int main(int argc, char **argv)
 
 	clock_t t0;
 	clock_t t1;
+	float   dt;
 
 	cout << "Path to dictionary: ";
 	cin >> tmp;
@@ -75,7 +76,10 @@ int main(int argc, char **argv)
 		dict.insert(tmp);
 	}
 	t1 = clock();
-	cout << "loaded dictionary in " << (t1 - t0) / CLOCKS_PER_SEC << "s\n";
+
+	dt  = t1 - t0;
+	dt /= CLOCKS_PER_SEC;
+	cout << "loaded dictionary in " << dt << "s\n";
 	ifile.close();
 
 	cout << "Path to input file: ";
@@ -137,10 +141,10 @@ int main(int argc, char **argv)
 		}
 	}
 	t1 = clock();
-	cout
-		<< "spell checked document in "
-		<< (t1 - t0) / CLOCKS_PER_SEC
-		<< "s\n";
+
+	dt  = t1 - t0;
+	dt /= CLOCKS_PER_SEC;
+	cout << "spell checked document in " << dt << "s\n";
 	ifile.close();
 
 	return EXIT_SUCCESS;
