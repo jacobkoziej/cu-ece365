@@ -122,6 +122,7 @@ int main(int argc, char **argv)
 		) {
 			tmp = *token;
 
+			// avoid words which are too long
 			if (tmp.length() > MAX_WORD_LEN) {
 				ofile
 					<< "Long word at line "
@@ -131,6 +132,10 @@ int main(int argc, char **argv)
 					<< '\n';
 				continue;
 			}
+
+			// avoid words with digits
+			if (tmp.find_first_of("0123456789") != string::npos)
+				continue;
 
 			if (!dict.exists(tmp))
 				ofile
