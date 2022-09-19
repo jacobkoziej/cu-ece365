@@ -28,6 +28,7 @@
 #include "ht.h"
 
 
+#define AVG_DICTSIZ  65536
 #define MAX_WORD_LEN 20
 
 
@@ -51,7 +52,7 @@ int main(int argc, char **argv)
 {
 	(void) argc;
 
-	htt<string> dict(stringkey, stringsiz);
+	htt<string> dict(stringkey, stringsiz, AVG_DICTSIZ);
 
 	ifstream ifile;
 	ofstream ofile;
