@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 
 	clock_t t0;
 	clock_t t1;
-	float   dt;
+	double  dt;
 
 	cout << "Path to dictionary: ";
 	cin >> tmp;
