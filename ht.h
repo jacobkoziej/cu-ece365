@@ -25,6 +25,9 @@
 #include <vector>
 
 
+#define HT_DEFSIZ 64
+
+
 class ht {
 	typedef struct ht_ent_s {
 		void        *key = nullptr;
@@ -41,7 +44,7 @@ class ht {
 	void rehash(void);
 
 public:
-	ht(std::size_t defsiz = 64);
+	ht(std::size_t defsiz = HT_DEFSIZ);
 	~ht(void);
 
 	bool exists(const void *key, std::size_t siz) const;
@@ -53,13 +56,18 @@ public:
 
 template <typename T>
 class htt {
-	ht p_ht;
+	ht *p_ht;
 
 	const void  *(*key)(const T &key) = nullptr;
 	std::size_t  (*siz)(const T &key) = nullptr;
 
 public:
-	htt(const void *(*key)(const T &key), std::size_t (*siz)(const T &key));
+	htt(
+		const void *(*key)(const T &key),
+		std::size_t (*siz)(const T &key),
+		std::size_t defsiz = HT_DEFSIZ
+	);
+	~htt(void);
 
 	inline bool exists(const T &key) const;
 	inline int  get(const T &key, void **val) const;
@@ -69,40 +77,52 @@ public:
 };
 
 template <typename T>
-htt<T>::htt(const void *(*key)(const T &key), std::size_t (*siz)(const T &key))
+htt<T>::htt(
+	const void *(*key)(const T &key),
+	std::size_t (*siz)(const T &key),
+	std::size_t defsiz
+)
 {
 	this->key = key;
 	this->siz = siz;
+
+	p_ht = new ht(defsiz);
+}
+
+template <typename T>
+htt<T>::~htt(void)
+{
+	delete p_ht;
 }
 
 template <typename T>
 inline bool htt<T>::exists(const T &key) const
 {
-	return p_ht.exists(this->key(key), this->siz(key));
+	return p_ht->exists(this->key(key), this->siz(key));
 }
 
 template <typename T>
 inline int htt<T>::get(const T &key, void **val) const
 {
-	return p_ht.get(this->key(key), this->siz(key), val);
+	return p_ht->get(this->key(key), this->siz(key), val);
 }
 
 template <typename T>
 inline int htt<T>::insert(const T &key, void *val)
 {
-	return p_ht.insert(this->key(key), this->siz(key), val);
+	return p_ht->insert(this->key(key), this->siz(key), val);
 }
 
 template <typename T>
 inline int htt<T>::rm(const T &key)
 {
-	return p_ht.rm(this->key(key), this->siz(key));
+	return p_ht->rm(this->key(key), this->siz(key));
 }
 
 template <typename T>
 inline int htt<T>::set(const T &key, void *val)
 {
-	return p_ht.set(this->key(key), this->siz(key), val);
+	return p_ht->set(this->key(key), this->siz(key), val);
 }
 
 
