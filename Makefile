@@ -22,7 +22,7 @@ CXXFLAGS := -Wall -Wextra -Wpedantic -g -std=c++11
 
 
 .PHONY: all
-all: spellcheck
+all: spellcheck useheap
 
 
 -include $(DEP)
@@ -30,11 +30,19 @@ all: spellcheck
 
 .PHONY: clean
 clean:
-	@rm -rvf *.a *.d *.o spellcheck
+	@rm -rvf *.a *.d *.o spellcheck useheap
 
 
 spellcheck: spellcheck.o ht.a
 	$(CXX) $(CXXFLAGS) -o $@ $^
+
+
+useheap: useheap.o heap.a
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+
+heap.a: heap.o
+	$(AR) $(ARFLAGS) $@ $?
 
 
 ht.a: ht.o
