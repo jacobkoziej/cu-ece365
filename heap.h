@@ -22,11 +22,29 @@
 
 #include <cstddef>
 #include <string>
+#include <vector>
+
+#include "ht.h"
 
 
 class heap {
+	typedef struct node_s {
+		std::string  id;
+		int          key;
+		void        *val;
+	} node_t;
+
+	static inline const void  *stringkey(const std::string &key);
+	static inline std::size_t  stringsiz(const std::string &key);
+
+	std::size_t          siz;
+	std::size_t          use;
+	htt<std::string>    *idmap;
+	std::vector<node_t>  nodes;
+
 public:
-	heap(std::size_t siz);
+	heap(std::size_t siz = 1);
+	~heap(void);
 
 	int insert(const std::string &id, int key, void *val = nullptr);
 	int setKey(const std::string &id, int key);
