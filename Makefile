@@ -17,7 +17,7 @@
 SRC := $(wildcard *.cc)
 DEP := $(SRC:.cc=.d)
 
-ARFLAGS  := crs
+ARFLAGS  := crs --thin
 CXXFLAGS := -Wall -Wextra -Wpedantic -g -std=c++11
 
 
@@ -41,7 +41,7 @@ useheap: useheap.o heap.a
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 
-heap.a: heap.o
+heap.a: heap.o ht.a
 	$(AR) $(ARFLAGS) $@ $?
 
 
