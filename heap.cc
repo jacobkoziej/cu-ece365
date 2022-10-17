@@ -56,26 +56,22 @@ void heap::percolate_down(std::size_t pos)
 
 void heap::percolate_up(std::size_t pos)
 {
-	auto tmp = nodes[pos];
+	nodes[0] = nodes[pos];
 	auto prv = pos;
 
-	// when called, we already know the parent is greater
-	pos >>= 1;
+	while (pos >> 1 > 0) {
+		pos >>= 1;
 
-	while (true) {
-		nodes[prv] = nodes[pos];
-		idmap->set(nodes[prv].id, &nodes[prv]);
-
-		if (pos <= 1) break;
-
-		if (tmp.key >= nodes[pos >> 1].key) break;
+		if (nodes[pos].key > nodes[prv].key) {
+			nodes[prv] = nodes[pos];
+			idmap->set(nodes[prv].id, &nodes[prv]);
+		} else break;
 
 		prv = pos;
-		pos >>= 1;
 	}
 
-	nodes[pos] = tmp;
-	idmap->set(nodes[pos].id, &nodes[pos]);
+	nodes[prv] = nodes[0];
+	idmap->set(nodes[prv].id, &nodes[prv]);
 }
 
 
@@ -112,7 +108,7 @@ int heap::insert(const std::string &id, int key, void *val)
 
 	if (use == 1) return 0;
 
-	if (nodes[pos << 1].key > nodes[pos].key) percolate_up(pos);
+	percolate_up(pos);
 
 	return 0;
 }
