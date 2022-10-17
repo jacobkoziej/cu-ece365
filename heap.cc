@@ -110,7 +110,7 @@ int heap::insert(const std::string &id, int key, void *val)
 	nodes[pos].val = val;
 	idmap->insert(id, &nodes[pos]);
 
-	if (pos == 1) return 0;
+	if (use == 1) return 0;
 
 	if (nodes[pos << 1].key > nodes[pos].key) percolate_up(pos);
 
@@ -135,6 +135,8 @@ int heap::deleteMin(std::string *id, int *key, void **val)
 
 	idmap->rm(nodes[1].id);
 	nodes[1] = nodes[use--];
+
+	if (use == 1) return 0;
 
 	percolate_down(1);
 
