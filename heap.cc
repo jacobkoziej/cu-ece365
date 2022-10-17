@@ -115,8 +115,18 @@ int heap::insert(const std::string &id, int key, void *val)
 
 int heap::setKey(const std::string &id, int key)
 {
-	(void) id;
-	(void) key;
+	node_t *p = nullptr;
+
+	if (idmap->get(id, (void**) &p) < 0) return 1;
+
+	size_t pos = p - &nodes[0];
+
+	nodes[pos].key = key;
+
+	if ((pos >> 1 >= 1) && (nodes[pos >> 1].key > nodes[pos].key))
+		percolate_up(pos);
+	else
+		percolate_down(pos);
 
 	return 0;
 }
