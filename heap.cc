@@ -73,9 +73,24 @@ heap::~heap(void)
 
 int heap::insert(const std::string &id, int key, void *val)
 {
-	(void) id;
-	(void) key;
-	(void) val;
+	// heap filled to capacity
+	if (use + 1 > siz) return 1;
+
+	void *node = nullptr;
+
+	// given id already exists
+	if (!idmap->get(id, &node)) return 2;
+
+	std::size_t pos = ++use;
+
+	nodes[pos].id  = id;
+	nodes[pos].key = key;
+	nodes[pos].val = val;
+	idmap->insert(id, &nodes[pos]);
+
+	if (pos == 1) return 0;
+
+	if (nodes[pos << 1].key > nodes[pos].key) percolate_up(pos);
 
 	return 0;
 }
