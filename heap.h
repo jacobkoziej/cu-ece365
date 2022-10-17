@@ -37,6 +37,8 @@ class heap {
 	static inline const void  *stringkey(const std::string &key);
 	static inline std::size_t  stringsiz(const std::string &key);
 
+	void percolate_up(std::size_t pos);
+
 	std::size_t          siz;
 	std::size_t          use;
 	htt<std::string>    *idmap;

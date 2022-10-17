@@ -32,6 +32,30 @@ inline std::size_t heap::stringsiz(const std::string &key)
 	return key.size();
 }
 
+void heap::percolate_up(std::size_t pos)
+{
+	auto tmp = nodes[pos];
+	auto prv = pos;
+
+	// when called, we already know the parent is greater
+	pos >>= 1;
+
+	while (true) {
+		nodes[prv] = nodes[pos];
+		idmap->set(nodes[prv].id, &nodes[prv]);
+
+		if (pos <= 1) break;
+
+		if (tmp.key >= nodes[pos >> 1].key) break;
+
+		prv = pos;
+		pos >>= 1;
+	}
+
+	nodes[pos] = tmp;
+	idmap->set(nodes[pos].id, &nodes[pos]);
+}
+
 
 heap::heap(std::size_t siz)
 {
