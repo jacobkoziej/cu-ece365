@@ -122,9 +122,10 @@ int heap::setKey(const std::string &id, int key)
 
 	size_t pos = p - &nodes[0];
 
+	int prv_key    = nodes[pos].key;
 	nodes[pos].key = key;
 
-	if ((pos >> 1 >= 1) && (nodes[pos >> 1].key > nodes[pos].key))
+	if (key < prv_key)
 		percolate_up(pos);
 	else
 		percolate_down(pos);
