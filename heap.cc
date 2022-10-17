@@ -34,7 +34,7 @@ inline std::size_t heap::stringsiz(const std::string &key)
 
 void heap::percolate_down(std::size_t pos)
 {
-	auto tmp = nodes[pos];
+	nodes[0] = nodes[pos];
 	auto prv = pos;
 
 	while (pos << 1 <= use) {
@@ -42,7 +42,7 @@ void heap::percolate_down(std::size_t pos)
 
 		if ((pos < use) && nodes[pos + 1].key < nodes[pos].key) ++pos;
 
-		if (tmp.key > nodes[pos].key) {
+		if (nodes[0].key > nodes[pos].key) {
 			nodes[prv] = nodes[pos];
 			idmap->set(nodes[prv].id, &nodes[prv]);
 		} else break;
@@ -50,7 +50,7 @@ void heap::percolate_down(std::size_t pos)
 		prv = pos;
 	}
 
-	nodes[pos] = tmp;
+	nodes[pos] = nodes[0];
 	idmap->set(nodes[pos].id, &nodes[pos]);
 }
 
