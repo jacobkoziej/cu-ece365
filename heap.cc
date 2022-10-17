@@ -50,8 +50,8 @@ void heap::percolate_down(std::size_t pos)
 		prv = pos;
 	}
 
-	nodes[pos] = nodes[0];
-	idmap->set(nodes[pos].id, &nodes[pos]);
+	nodes[prv] = nodes[0];
+	idmap->set(nodes[prv].id, &nodes[prv]);
 }
 
 void heap::percolate_up(std::size_t pos)
