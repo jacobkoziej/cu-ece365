@@ -139,11 +139,23 @@ int heap::deleteMin(std::string *id, int *key, void **val)
 	return 0;
 }
 
-int heap::remove(const std::string  &id, int *key, void **val)
+int heap::remove(const std::string &id, int *key, void **val)
 {
-	(void) id;
-	(void) key;
-	(void) val;
+	node_t *p = nullptr;
+
+	if (idmap->get(id, (void**) &p) < 0) return 1;
+
+	if (key) *key = p->key;
+	if (val) *val = p->val;
+
+	size_t pos = p - &nodes[0];
+
+	idmap->rm(nodes[pos].id);
+	nodes[pos] = nodes[use--];
+
+	if (use == 1) return 0;
+
+	percolate_down(pos);
 
 	return 0;
 }
