@@ -62,7 +62,7 @@ void heap::percolate_up(std::size_t pos)
 	while (pos >> 1 > 0) {
 		pos >>= 1;
 
-		if (nodes[pos].key > nodes[prv].key) {
+		if (nodes[0].key < nodes[pos].key) {
 			nodes[prv] = nodes[pos];
 			idmap->set(nodes[prv].id, &nodes[prv]);
 		} else break;
