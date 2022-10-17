@@ -40,7 +40,7 @@ void heap::percolate_down(std::size_t pos)
 	while (pos << 1 <= use) {
 		pos <<= 1;
 
-		if ((pos >= use) && nodes[pos + 1].key < nodes[pos].key) ++pos;
+		if ((pos < use) && nodes[pos + 1].key < nodes[pos].key) ++pos;
 
 		if (tmp.key > nodes[pos].key) {
 			nodes[prv] = nodes[pos];
