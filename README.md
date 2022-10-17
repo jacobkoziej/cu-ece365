@@ -10,6 +10,7 @@ found on the [course page].
 ## Projects
 
 * `spellcheck` - primitive spell checker utilizing a hash table
+* `useheap` - binary heap tester
 
 
 ## Copyright & Licensing
