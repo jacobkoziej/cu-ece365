@@ -117,6 +117,7 @@ int heap::setKey(const std::string &id, int key)
 {
 	node_t *p = nullptr;
 
+	// given id doesn't exist
 	if (idmap->get(id, (void**) &p) < 0) return 1;
 
 	size_t pos = p - &nodes[0];
@@ -133,6 +134,7 @@ int heap::setKey(const std::string &id, int key)
 
 int heap::deleteMin(std::string *id, int *key, void **val)
 {
+	// heap is empty
 	if (!use) return 1;
 
 	if (id)  *id  = nodes[1].id;
@@ -153,6 +155,7 @@ int heap::remove(const std::string &id, int *key, void **val)
 {
 	node_t *p = nullptr;
 
+	// given id doesn't exist
 	if (idmap->get(id, (void**) &p) < 0) return 1;
 
 	if (key) *key = p->key;
