@@ -35,11 +35,6 @@ inline std::size_t heap::stringsiz(const std::string &key)
 
 heap::heap(std::size_t siz)
 {
-	// determine highest power of two
-	unsigned shift = 0;
-	while (siz >>= 1, siz) ++shift;
-	siz = ((std::size_t) 1) << shift;
-
 	idmap = new htt<std::string>(heap::stringkey, heap::stringsiz, siz * 2);
 	nodes.resize(siz + 1);
 
