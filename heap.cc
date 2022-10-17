@@ -125,11 +125,18 @@ int heap::setKey(const std::string &id, int key)
 	return 0;
 }
 
-int heap::deleteMin(const std::string *id, int *key, void **val)
+int heap::deleteMin(std::string *id, int *key, void **val)
 {
-	(void) id;
-	(void) key;
-	(void) val;
+	if (!use) return 1;
+
+	if (id)  *id  = nodes[1].id;
+	if (key) *key = nodes[1].key;
+	if (val) *val = nodes[1].val;
+
+	idmap->rm(nodes[1].id);
+	nodes[1] = nodes[use--];
+
+	percolate_down(1);
 
 	return 0;
 }

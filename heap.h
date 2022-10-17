@@ -49,13 +49,13 @@ public:
 	heap(std::size_t siz = 1);
 	~heap(void);
 
+	int deleteMin(
+		std::string  *id  = nullptr,
+		int          *key = nullptr,
+		void        **val = nullptr
+	);
 	int insert(const std::string &id, int key, void *val = nullptr);
 	int setKey(const std::string &id, int key);
-	int deleteMin(
-		const std::string  *id  = nullptr,
-		int                *key = nullptr,
-		void              **val = nullptr
-	);
 	int remove(
 		const std::string  &id,
 		int                *key = nullptr,
