@@ -18,6 +18,11 @@
  */
 
 #include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <queue>
+#include <sstream>
+#include <string>
 
 #include "graph.h"
 
@@ -25,7 +30,50 @@
 using namespace std;
 
 
+void parse_graph(const string &path, graph &input)
+{
+	ifstream file;
+
+	file.open(path);
+	if (!file) {
+		cerr << path << ": could not be opened\n";
+		exit(EXIT_FAILURE);
+	}
+
+	string tmp;
+	while (getline(file, tmp)) {
+		stringstream  ss(tmp);
+		string        token;
+		queue<string> tokens;
+
+		while (getline(ss, token, ' '))
+			tokens.push(token);
+
+		string v = tokens.front();
+		tokens.pop();
+
+		string w = tokens.front();
+		tokens.pop();
+		int cost = stoi(tokens.front());
+
+		input.add_edge(v, w, cost);
+	}
+
+	file.close();
+}
+
+
 int main(void)
 {
+	graph dijkstra;
+
+	ifstream ifile;
+	string tmp;
+
+	cout << "path to graph file: ";
+	cin  >> tmp;
+
+	parse_graph(tmp, dijkstra);
+
 	return EXIT_SUCCESS;
 }
