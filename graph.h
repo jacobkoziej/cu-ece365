@@ -22,6 +22,7 @@
 
 #include <climits>
 #include <cstddef>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -63,6 +64,8 @@ public:
 	~graph(void);
 
 	void add_edge(std::string &src_id, std::string &dst_id, int cost);
+
+	friend std::ostream& operator << (std::ostream &out, const graph &g);
 };
 
 

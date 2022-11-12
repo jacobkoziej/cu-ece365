@@ -19,6 +19,8 @@
 #include "graph.h"
 
 #include <cstddef>
+#include <iostream>
+#include <stack>
 #include <string>
 
 #include "ht.h"
@@ -74,4 +76,37 @@ void graph::add_edge(std::string &src_id, std::string &dst_id, int cost)
 	src->edge.resize(pos + 1);
 	src->edge[pos].cost = cost;
 	src->edge[pos].node = dst;
+}
+
+std::ostream& operator << (std::ostream &out, const graph &g)
+{
+	for (auto n : g.node) {
+		out << n->id << ": ";
+
+		if (n->dist == INT_MAX) {
+			out << "NO PATH\n";
+			continue;
+		}
+
+		out << n->dist << " [";
+
+		std::stack<std::string> path;
+		graph::node_t *tmp = n;
+		do {
+			path.push(tmp->id);
+			tmp = tmp->parent;
+		} while (tmp);
+
+		out << path.top();
+		path.pop();
+
+		while (!path.empty()) {
+			out << ", " << path.top();
+			path.pop();
+		}
+
+		out << "]\n";
+	}
+
+	return out;
 }
