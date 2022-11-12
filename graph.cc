@@ -46,3 +46,32 @@ graph::~graph(void)
 {
 	delete idmap;
 }
+
+void graph::add_edge(std::string &src_id, std::string &dst_id, unsigned cost)
+{
+	node_t *src;
+	node_t *dst;
+
+	if (idmap->get(src_id, (void**) &src) < 0) {
+		src = new node_t;
+
+		src->id = src_id;
+		node.push_back(src);
+		idmap->insert(src_id, src);
+	}
+
+	if (idmap->get(dst_id, (void**) &dst) < 0) {
+		dst = new node_t;
+
+		dst->id = dst_id;
+		node.push_back(dst);
+		idmap->insert(dst_id, dst);
+	}
+
+	// convoluted way to push_back() since struct edge_s
+	// is defined inside of node_t
+	std::size_t pos = src->edge.size();
+	src->edge.resize(pos + 1);
+	src->edge[pos].cost = cost;
+	src->edge[pos].node = dst;
+}

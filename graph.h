@@ -61,6 +61,8 @@ class graph {
 public:
 	graph(void);
 	~graph(void);
+
+	void add_edge(std::string &src_id, std::string &dst_id, unsigned cost);
 };
 
 
