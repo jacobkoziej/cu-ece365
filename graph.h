@@ -36,14 +36,14 @@ class graph {
 		};
 
 		std::string                id;
-		unsigned                   dist;
+		int                        dist;
 		std::vector<struct edge_s> edge;
 
 		struct node_s *parent;
 		struct node_s *child;
 
 		node_s(void) {
-			dist = UINT_MAX;
+			dist = INT_MAX;
 
 			parent = nullptr;
 			child  = nullptr;
@@ -62,7 +62,7 @@ public:
 	graph(void);
 	~graph(void);
 
-	void add_edge(std::string &src_id, std::string &dst_id, unsigned cost);
+	void add_edge(std::string &src_id, std::string &dst_id, int cost);
 };
 
 

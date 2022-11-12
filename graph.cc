@@ -47,7 +47,7 @@ graph::~graph(void)
 	delete idmap;
 }
 
-void graph::add_edge(std::string &src_id, std::string &dst_id, unsigned cost)
+void graph::add_edge(std::string &src_id, std::string &dst_id, int cost)
 {
 	node_t *src;
 	node_t *dst;
