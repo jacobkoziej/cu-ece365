@@ -169,7 +169,7 @@ int heap::remove(const std::string &id, int *key, void **val)
 
 	if (use == 1) return 0;
 
-	if (nodes[pos].key < nodes[pos >> 1].key)
+	if ((pos > 1) && (nodes[pos].key < nodes[pos >> 1].key))
 		percolate_up(pos);
 	else
 		percolate_down(pos);
