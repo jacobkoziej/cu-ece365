@@ -22,7 +22,7 @@ CXXFLAGS := -Wall -Wextra -Wpedantic -g -std=c++11
 
 
 .PHONY: all
-all: spellcheck useheap
+all: dijkstra spellcheck useheap
 
 
 -include $(DEP)
@@ -30,7 +30,11 @@ all: spellcheck useheap
 
 .PHONY: clean
 clean:
-	@rm -rvf *.a *.d *.o spellcheck useheap
+	@rm -rvf *.a *.d *.o dijkstra spellcheck useheap
+
+
+dijkstra: dijkstra.o graph.a
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 
 spellcheck: spellcheck.o ht.a
@@ -39,6 +43,10 @@ spellcheck: spellcheck.o ht.a
 
 useheap: useheap.o heap.a
 	$(CXX) $(CXXFLAGS) -o $@ $^
+
+
+graph.a: graph.o heap.o ht.o
+	$(AR) $(ARFLAGS) $@ $?
 
 
 heap.a: heap.o ht.o
