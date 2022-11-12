@@ -24,6 +24,7 @@
 #include <string>
 
 #include "ht.h"
+#include "heap.h"
 
 
 inline const void *graph::stringkey(const std::string &key)
@@ -76,6 +77,40 @@ void graph::add_edge(std::string &src_id, std::string &dst_id, int cost)
 	src->edge.resize(pos + 1);
 	src->edge[pos].cost = cost;
 	src->edge[pos].node = dst;
+}
+
+int graph::dijkstra(std::string &start_id)
+{
+	if (idmap->get(start_id, (void**) &start) < 0) return -1;
+
+	heap unknown(node.size());
+
+	for (auto n : node) {
+		n->dist   = INT_MAX;
+		n->parent = nullptr;
+		n->child  = nullptr;
+
+		unknown.insert(n->id, n->dist, n);
+	}
+
+	start->dist = 0;
+	unknown.setKey(start->id, start->dist);
+
+	node_t *tmp;
+	while (!unknown.deleteMin(nullptr, nullptr, (void**) &tmp)) {
+		for (auto e : tmp->edge) {
+			int dist = tmp->dist + e.cost;
+
+			if (dist < e.node->dist) {
+				e.node->dist   = dist;
+				e.node->parent = tmp;
+
+				unknown.setKey(e.node->id, e.node->dist);
+			}
+		}
+	}
+
+	return 0;
 }
 
 std::ostream& operator << (std::ostream &out, const graph &g)

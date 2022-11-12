@@ -64,6 +64,7 @@ public:
 	~graph(void);
 
 	void add_edge(std::string &src_id, std::string &dst_id, int cost);
+	int  dijkstra(std::string &start_id);
 
 	friend std::ostream& operator << (std::ostream &out, const graph &g);
 };
