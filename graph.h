@@ -20,8 +20,11 @@
 #define CU_ECE365_GRAPH_H
 
 
+#include <cstddef>
 #include <string>
 #include <vector>
+
+#include "ht.h"
 
 
 class graph {
@@ -45,6 +48,18 @@ class graph {
 			child  = nullptr;
 		}
 	} node_t;
+
+	static inline const void  *stringkey(const std::string &key);
+	static inline std::size_t  stringsiz(const std::string &key);
+
+	std::vector<node_t*>  node;
+	htt<std::string>     *idmap;
+
+	node_t *start;
+
+public:
+	graph(void);
+	~graph(void);
 };
 
 

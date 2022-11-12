@@ -17,3 +17,32 @@
  */
 
 #include "graph.h"
+
+#include <cstddef>
+#include <string>
+
+#include "ht.h"
+
+
+inline const void *graph::stringkey(const std::string &key)
+{
+	return key.data();
+}
+
+inline std::size_t graph::stringsiz(const std::string &key)
+{
+	return key.size();
+}
+
+
+graph::graph(void)
+{
+	idmap = new htt<std::string>(graph::stringkey, graph::stringsiz);
+
+	start = nullptr;
+}
+
+graph::~graph(void)
+{
+	delete idmap;
+}
