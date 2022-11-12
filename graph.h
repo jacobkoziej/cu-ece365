@@ -20,6 +20,7 @@
 #define CU_ECE365_GRAPH_H
 
 
+#include <climits>
 #include <cstddef>
 #include <string>
 #include <vector>
@@ -42,7 +43,7 @@ class graph {
 		struct node_s *child;
 
 		node_s(void) {
-			dist = 0;
+			dist = UINT_MAX;
 
 			parent = nullptr;
 			child  = nullptr;
