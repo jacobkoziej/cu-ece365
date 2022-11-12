@@ -20,4 +20,32 @@
 #define CU_ECE365_GRAPH_H
 
 
+#include <string>
+#include <vector>
+
+
+class graph {
+	typedef struct node_s {
+		struct edge_s {
+			unsigned       cost;
+			struct node_s *node;
+		};
+
+		std::string                id;
+		unsigned                   dist;
+		std::vector<struct edge_s> edge;
+
+		struct node_s *parent;
+		struct node_s *child;
+
+		node_s(void) {
+			dist = 0;
+
+			parent = nullptr;
+			child  = nullptr;
+		}
+	} node_t;
+};
+
+
 #endif /* CU_ECE365_GRAPH_H */
