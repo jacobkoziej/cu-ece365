@@ -36,18 +36,14 @@ class graph {
 			struct node_s *node;
 		};
 
-		std::string                id;
-		int                        dist;
-		std::vector<struct edge_s> edge;
-
-		struct node_s *parent;
-		struct node_s *child;
+		std::string                 id;
+		int                         dist;
+		std::vector<struct edge_s>  edge;
+		struct node_s              *parent;
 
 		node_s(void) {
-			dist = INT_MAX;
-
+			dist   = INT_MAX;
 			parent = nullptr;
-			child  = nullptr;
 		}
 	} node_t;
 

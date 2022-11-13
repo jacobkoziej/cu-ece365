@@ -88,7 +88,6 @@ int graph::dijkstra(std::string &start_id)
 	for (auto n : node) {
 		n->dist   = INT_MAX;
 		n->parent = nullptr;
-		n->child  = nullptr;
 
 		unknown.insert(n->id, n->dist, n);
 	}
