@@ -11,6 +11,7 @@ found on the [course page].
 
 * `spellcheck` - primitive spell checker utilizing a hash table
 * `useheap` - binary heap tester
+* `dijkstra` - showcases Dijkstra's algorithm
 
 
 ## Copyright & Licensing
