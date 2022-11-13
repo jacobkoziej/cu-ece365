@@ -18,6 +18,7 @@
  */
 
 #include <cstdlib>
+#include <ctime>
 #include <fstream>
 #include <iostream>
 #include <queue>
@@ -67,13 +68,42 @@ int main(void)
 {
 	graph dijkstra;
 
-	ifstream ifile;
-	string tmp;
+	string path;
 
 	cout << "path to graph file: ";
-	cin  >> tmp;
+	cin  >> path;
 
-	parse_graph(tmp, dijkstra);
+	parse_graph(path, dijkstra);
+
+	bool    bad;
+	clock_t t0;
+	clock_t t1;
+
+	do {
+		string start;
+		cout << "starting vertex: ";
+		cin >> start;
+
+		t0 = clock();
+		bad = dijkstra.dijkstra(start);
+		t1 = clock();
+	} while (bad);
+
+	float dt = t1 - t0;
+	dt /= CLOCKS_PER_SEC;
+	cout << "applied dijkstra's algorithm in " << dt << "s\n";
+
+	cout << "path to output file: ";
+	cin  >> path;
+
+	ofstream file(path);
+	if (!file) {
+		cerr << ": cannot be opened\n";
+		return EXIT_FAILURE;
+	}
+
+	file << dijkstra;
+	file.close();
 
 	return EXIT_SUCCESS;
 }
