@@ -47,6 +47,7 @@ graph::graph(void)
 
 graph::~graph(void)
 {
+	for (auto n : node) delete n;
 	delete idmap;
 }
 
