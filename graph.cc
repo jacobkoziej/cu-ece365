@@ -98,6 +98,8 @@ int graph::dijkstra(std::string &start_id)
 
 	node_t *tmp;
 	while (!unknown.deleteMin(nullptr, nullptr, (void**) &tmp)) {
+		if (tmp->dist == INT_MAX) continue;  // no path
+
 		for (auto e : tmp->edge) {
 			int dist = tmp->dist + e.cost;
 
