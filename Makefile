@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+BIN := dijkstra merge spellcheck useheap
 SRC := $(wildcard *.cc)
 DEP := $(SRC:.cc=.d)
 
@@ -22,7 +23,7 @@ CXXFLAGS := -Wall -Wextra -Wpedantic -g -std=c++11
 
 
 .PHONY: all
-all: dijkstra merge spellcheck useheap
+all: $(BIN)
 
 
 -include $(DEP)
@@ -30,7 +31,7 @@ all: dijkstra merge spellcheck useheap
 
 .PHONY: clean
 clean:
-	@rm -rvf *.a *.d *.o dijkstra merge spellcheck useheap
+	@rm -rvf *.a *.d *.o $(BIN)
 
 
 dijkstra: dijkstra.o graph.a
