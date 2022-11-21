@@ -69,7 +69,7 @@ void merge::set_strings(std::string &a, std::string &b)
 
 	bitmap = new bitmap_t*[ydim];
 
-	std::size_t xdim_siz = xdim / sizeof(bitmap_t);
+	std::size_t xdim_siz = xdim / (sizeof(bitmap_t) << 3);
 	if (xdim & 0x07) ++xdim_siz;
 
 
