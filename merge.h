@@ -32,7 +32,7 @@ class merge {
 
 public:
 	merge(void);
-	merge(std::string a, std::string b);
+	merge(std::string &a, std::string &b);
 	~merge(void);
 
 	void set_strings(std::string &a, std::string &b);
