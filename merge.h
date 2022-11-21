@@ -32,6 +32,9 @@ typedef unsigned long bitmap_t;
 class merge {
 	bitmap_t **bitmap;
 
+	std::size_t xdim;  // in bits
+	std::size_t ydim;
+
 	std::string a;
 	std::string b;
 
