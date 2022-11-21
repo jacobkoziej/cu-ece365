@@ -21,4 +21,23 @@
 #define CU_ECE365_MERGE
 
 
+#include <string>
+
+
+class merge {
+	unsigned long **bitmap;
+
+	std::string a;
+	std::string b;
+
+public:
+	merge(void);
+	merge(std::string a, std::string b);
+	~merge(void);
+
+	void set_strings(std::string &a, std::string &b);
+	bool valid_merge(std::string &merge);
+};
+
+
 #endif /* CU_ECE365_MERGE */
