@@ -24,8 +24,13 @@
 #include <string>
 
 
+typedef unsigned long bitmap_t;
+
+
+// implemented with bit-packing for some
+// *quality* productive procrastination
 class merge {
-	unsigned long **bitmap;
+	bitmap_t **bitmap;
 
 	std::string a;
 	std::string b;
