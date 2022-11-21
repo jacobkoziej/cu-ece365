@@ -38,6 +38,8 @@ class merge {
 	std::string a;
 	std::string b;
 
+	void delete_bitmap(void);
+
 public:
 	merge(void);
 	merge(std::string &a, std::string &b);

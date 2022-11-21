@@ -22,6 +22,17 @@
 #include <cstdlib>
 
 
+void merge::delete_bitmap(void)
+{
+	for (std::size_t i = 0; i < ydim; i++)
+		delete[] bitmap[i];
+
+	delete[] bitmap;
+
+	bitmap = nullptr;
+}
+
+
 int main(void)
 {
 	return EXIT_SUCCESS;
