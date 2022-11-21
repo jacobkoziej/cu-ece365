@@ -46,6 +46,13 @@ merge::merge(std::string &a, std::string &b)
 	set_strings(a, b);
 }
 
+merge::~merge(void)
+{
+	if (!bitmap) return;
+
+	delete_bitmap();
+}
+
 void merge::set_strings(std::string &a, std::string &b)
 {
 	if (bitmap) delete_bitmap();
