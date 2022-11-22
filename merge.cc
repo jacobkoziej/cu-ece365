@@ -52,6 +52,46 @@ string merge(string a, string b, string c)
 		matrix[i + 1][0] = matrix[i][0] + 1;
 	}
 
+	// merge
+	for (size_t i = 1; i <= b.size(); i++)
+		for (size_t j = 1; j <= a.size(); j++) {
+			size_t pos;
+
+			// vertical attempt
+			pos = matrix[i - 1][j] + 1;
+			if (pos) {
+				if (c[pos] == a[j - 1]) {
+					matrix[i][j] = pos;
+					continue;
+				}
+				if ((j - 1 < b.size()) && (c[pos] == b[i - 1])) {
+					matrix[i][j] = pos;
+					continue;
+				}
+			}
+
+			// horizontal attempt
+			pos = matrix[i][j - 1] + 1;
+			if (pos) {
+				if (c[pos] == b[i - 1]) {
+					matrix[i][j] = pos;
+					continue;
+				}
+				if ((i - 1 < a.size()) && (c[pos] == a[j - 1])) {
+					matrix[i][j] = pos;
+					continue;
+				}
+			}
+
+			matrix[i][j] = SIZE_MAX;
+		}
+
+	size_t xpos = a.size();
+	size_t ypos = b.size();
+
+	if (matrix[ypos][xpos] == SIZE_MAX)
+		return "*** NOT A MERGE ***";
+
 	return "*** NOT A MERGE ***";
 }
 
