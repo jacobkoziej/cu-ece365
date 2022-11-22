@@ -17,7 +17,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <cstddef>
 #include <cstdlib>
+#include <string>
+
+
+#define MAX_STRLEN 1000
+
+
+using namespace std;
+
+
+string merge(string a, string b, string c)
+{
+	static size_t matrix[MAX_STRLEN + 1][MAX_STRLEN + 1];
+
+	return "*** NOT A MERGE ***";
+}
 
 
 int main(void)
