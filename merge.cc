@@ -32,6 +32,26 @@ string merge(string a, string b, string c)
 {
 	static size_t matrix[MAX_STRLEN + 1][MAX_STRLEN + 1];
 
+	// can we even have a vaild merge?
+	if (a.size() + b.size() != c.size()) return "*** NOT A MERGE ***";
+
+	// initialize matrix
+	matrix[0][0] = SIZE_MAX;
+	for (size_t i = 1; i <= a.size(); i++)
+		matrix[0][i] = SIZE_MAX;
+	for (size_t i = 1; i <= b.size(); i++)
+		matrix[i][0] = SIZE_MAX;
+
+	// initial parse
+	for (size_t i = 0; i < a.size(); i++) {
+		if (a[i] != c[i]) break;
+		matrix[0][i + 1] = matrix[0][i] + 1;
+	}
+	for (size_t i = 0; i < b.size(); i++) {
+		if (b[i] != c[i]) break;
+		matrix[i + 1][0] = matrix[i][0] + 1;
+	}
+
 	return "*** NOT A MERGE ***";
 }
 
