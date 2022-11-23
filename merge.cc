@@ -17,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <algorithm>
+#include <cctype>
 #include <cstddef>
 #include <cstdlib>
 #include <string>
@@ -86,13 +88,34 @@ string merge(string a, string b, string c)
 			matrix[i][j] = SIZE_MAX;
 		}
 
-	size_t xpos = a.size();
-	size_t ypos = b.size();
+	size_t apos = a.size();
+	size_t bpos = b.size();
 
-	if (matrix[ypos][xpos] == SIZE_MAX)
+	if (matrix[bpos][apos] == SIZE_MAX)
 		return "*** NOT A MERGE ***";
 
-	return "*** NOT A MERGE ***";
+	string out;
+
+	// initial output generation
+	while (apos && bpos) {
+		if (matrix[bpos][apos - 1] == SIZE_MAX) {
+			out.push_back(b[--bpos]);
+			continue;
+		}
+		if (matrix[bpos - 1][apos] == SIZE_MAX) {
+			out.push_back(toupper(a[--apos]));
+			continue;
+		}
+	}
+
+	// finish up
+	while (apos) out.push_back(toupper(a[--apos]));
+	while (bpos) out.push_back(b[--apos]);
+
+	// invert output
+	reverse(out.begin(), out.end());
+
+	return out;
 }
 
 
