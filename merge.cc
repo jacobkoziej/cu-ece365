@@ -66,7 +66,7 @@ string merge(string a, string b, string c)
 					matrix[i][j] = pos;
 					continue;
 				}
-				if ((j - 1 < b.size()) && (c[pos] == b[i - 1])) {
+				if ((j - 1 <= b.size()) && (c[pos] == b[i - 1])) {
 					matrix[i][j] = pos;
 					continue;
 				}
@@ -79,7 +79,7 @@ string merge(string a, string b, string c)
 					matrix[i][j] = pos;
 					continue;
 				}
-				if ((i - 1 < a.size()) && (c[pos] == a[j - 1])) {
+				if ((i - 1 <= a.size()) && (c[pos] == a[j - 1])) {
 					matrix[i][j] = pos;
 					continue;
 				}
