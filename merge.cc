@@ -98,11 +98,11 @@ string merge(string a, string b, string c)
 
 	// initial output generation
 	while (apos && bpos) {
-		if (matrix[bpos][apos - 1] == SIZE_MAX) {
+		if (matrix[bpos - 1][apos] != SIZE_MAX) {
 			out.push_back(b[--bpos]);
 			continue;
 		}
-		if (matrix[bpos - 1][apos] == SIZE_MAX) {
+		if (matrix[bpos][apos - 1] != SIZE_MAX) {
 			out.push_back(toupper(a[--apos]));
 			continue;
 		}
