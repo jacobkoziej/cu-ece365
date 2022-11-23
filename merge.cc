@@ -110,7 +110,7 @@ string merge(string a, string b, string c)
 
 	// finish up
 	while (apos) out.push_back(toupper(a[--apos]));
-	while (bpos) out.push_back(b[--apos]);
+	while (bpos) out.push_back(b[--bpos]);
 
 	// invert output
 	reverse(out.begin(), out.end());
