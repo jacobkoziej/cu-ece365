@@ -21,6 +21,8 @@
 #include <cctype>
 #include <cstddef>
 #include <cstdlib>
+#include <fstream>
+#include <iostream>
 #include <string>
 
 
@@ -30,7 +32,7 @@
 using namespace std;
 
 
-string merge(string a, string b, string c)
+string merge(const string &a, const string &b, const string &c)
 {
 	static size_t matrix[MAX_STRLEN + 1][MAX_STRLEN + 1];
 
@@ -121,5 +123,43 @@ string merge(string a, string b, string c)
 
 int main(void)
 {
+	string path;
+
+	cout << "path to graph file: ";
+	cin  >> path;
+
+	ifstream ifile;
+	ofstream ofile;
+
+	ifile.open(path);
+	if (!ifile) {
+		cerr << path << ": could not be opened\n";
+		exit(EXIT_FAILURE);
+	}
+
+	cout << "path to output file: ";
+	cin  >> path;
+
+	ofile.open(path);
+	if (!ofile) {
+		cerr << path << ": could not be opened\n";
+		exit(EXIT_FAILURE);
+	}
+
+	string a;
+	string b;
+	string c;
+
+	while (true) {
+		if (!getline(ifile, a)) break;
+		if (!getline(ifile, b)) break;
+		if (!getline(ifile, c)) break;
+
+		ofile << merge(a, b, c) << '\n';
+	}
+
+	ifile.close();
+	ofile.close();
+
 	return EXIT_SUCCESS;
 }
