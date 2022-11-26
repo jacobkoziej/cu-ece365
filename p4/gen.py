@@ -16,6 +16,49 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import argparse
+import random
+import string
+
+
+def gen(k: int) -> tuple[str, str, str]:
+    a = ''.join(random.choices(string.ascii_lowercase, k=k))
+    b = ''.join(random.choices(string.ascii_lowercase, k=k))
+
+    aa = a
+    bb = b
+    cc = ''
+
+    while len(aa) and len(bb):
+        if random.choice([True, False]):
+            cc += aa[:1]
+            aa  = aa[1:]
+        else:
+            cc += bb[:1]
+            bb  = bb[1:]
+
+    while len(aa):
+        cc += aa[:1]
+        aa  = aa[1:]
+
+    while len(bb):
+        cc += bb[:1]
+        bb  = bb[1:]
+
+
+    aa = a
+    bb = b
+    c  = ''
+    while len(cc):
+        if cc[:1] == aa[:1]:
+            c += aa[:1].upper()
+            aa = aa[1:]
+        else:
+            c += bb[:1]
+            bb = bb[1:]
+
+        cc = cc[1:]
+
+    return (a, b, c)
 
 
 def main():
