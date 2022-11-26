@@ -129,7 +129,7 @@ int main(void)
 {
 	string path;
 
-	cout << "path to graph file: ";
+	cout << "path to input file: ";
 	cin  >> path;
 
 	ifstream ifile;
