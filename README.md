@@ -12,6 +12,7 @@ found on the [course page].
 * `spellcheck` - primitive spell checker utilizing a hash table
 * `useheap` - binary heap tester
 * `dijkstra` - showcases Dijkstra's algorithm
+* `merge` - 1998 ACMGNYR [Problem G - Together to the End]
 
 
 ## Copyright & Licensing
@@ -22,5 +23,6 @@ Distributed under the [GPLv3] or later.
 
 
 [course page]: http://faculty.cooper.edu/sable2/courses/fall2022/ece365/
+[Problem G - Together to the End]: http://acmgnyr.org/year1998/prob_g.html
 [`<jacobkoziej@gmail.com>`]: mailto:jacobkoziej@gmail.com
 [GPLv3]: LICENSE.md
