@@ -64,7 +64,11 @@ string merge(const string &a, const string &b, const string &c)
 			// vertical attempt
 			pos = matrix[i - 1][j] + 1;
 			if (pos) {
-				if (c[pos] == a[j - 1]) {
+				if (
+					(matrix[i - 1][j] == SIZE_MAX)
+					&&
+					(c[pos] == a[j - 1])
+				) {
 					matrix[i][j] = pos;
 					continue;
 				}
