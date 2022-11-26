@@ -98,6 +98,17 @@ def main():
 
     args = parser.parse_args()
 
+    while args.count:
+        a, b, c = gen(args.length)
+
+        args.input.write(a + '\n')
+        args.input.write(b + '\n')
+        args.input.write(c.lower() + '\n')
+
+        args.output.write(c + '\n')
+
+        args.count -= 1
+
 
 if __name__ == '__main__':
     main()
